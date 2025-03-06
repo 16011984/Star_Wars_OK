@@ -1,0 +1,1 @@
+de moemnto la pagina renderiza y tengo un slider con imagenes funcionando 18:30   06/03/2025

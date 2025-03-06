@@ -1,32 +1,19 @@
-export const initialStore=()=>{
-  return{
-    message: null,
-    todos: [
-      {
-        id: 1,
-        title: "Make the bed",
-        background: null,
-      },
-      {
-        id: 2,
-        title: "Do my homework",
-        background: null,
-      }
-    ]
-  }
-}
+import { configureStore } from '@reduxjs/toolkit';
+import rootReducer from './reducers/Reducer';  
 
-export default function storeReducer(store, action = {}) {
-  switch(action.type){
-    case 'add_task':
 
-      const { id,  color } = action.payload
 
-      return {
-        ...store,
-        todos: store.todos.map((todo) => (todo.id === id ? { ...todo, background: color } : todo))
-      };
-    default:
-      throw Error('Unknown action.');
-  }    
-}
+export const initialStore = {
+  // Agrega las propiedades necesarias para el estado inicial
+  characters: [],
+  loading: false,
+  error: null,
+};
+
+// Configurar el store
+const store = configureStore({
+  reducer: rootReducer,
+  devTools: process.env.NODE_ENV !== 'production', 
+});
+
+export default store;

@@ -1,18 +1,34 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import './index.css'  // Global styles for your application
-import { RouterProvider } from "react-router-dom";  // Import RouterProvider to use the router
-import { router } from "./routes";  // Import the router configuration
-import { StoreProvider } from './hooks/useGlobalReducer';  // Import the StoreProvider for global state management
+import './css/index.css'  
+import { RouterProvider } from "react-router-dom";  
+import { router } from "./routes";  
+import store from './store';
+import StoreProvider from './hooks/useGlobalReducer';
+import { Provider } from 'react-redux';
+import ImageSlider from './components/ImageSlider';
+import Images from './components/GetImages';
+import Home from './pages/Home';
+
 
 const Main = () => {
     return (
-        <React.StrictMode>  
-            {/* Provide global state to all components */}
-            <StoreProvider> 
-                {/* Set up routing for the application */} 
+        <React.StrictMode>
+
+            <StoreProvider>
+
+                <Provider store={store}>
+                    <Home />
+                </Provider>,
+
+                <div>
+                    <h1>Mi Slider en React</h1>
+                    <ImageSlider images={Images} interval={3000} autoplay={true} showButtons={true} />
+                </div>
+
                 <RouterProvider router={router}>
                 </RouterProvider>
+
             </StoreProvider>
         </React.StrictMode>
     );
